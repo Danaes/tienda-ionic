@@ -1,23 +1,56 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            Mi tienda
-        </ion-title>
+    <ion-navbar color="light">
+
+      <ion-buttons left>
+        <button ion-button
+                class="menuIcon"
+                icon-only
+                *ngIf="_us.token"
+                (click)="_us.logout()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+        <button ion-button
+                class="menuIcon"
+                icon-only
+                *ngIf="!_us.token"
+                (click)="login()">
+          <ion-icon name="log-in"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-title>
+          Mi tienda
+      </ion-title>
+
+      <ion-buttons end>
+        <button ion-button
+                icon-only
+                (click)="showCart()">
+          <ion-icon name="cart"></ion-icon>
+
+          <ion-badge color="danger"
+                   class="carrito-numero"
+                   *ngIf="_cs.items.length > 0">
+            {{ _cs.items.length }}
+          </ion-badge>
+        </button> &nbsp; &nbsp; &nbsp;
+
+      </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
     <ion-grid>
-        <ion-row *ngFor="let item of _ps.productos">
-            <ion-col>
-                <img src="http://localhost/rest/public/img/productos/{{item.codigo}}.jpg">
+        <ion-row *ngFor="let pares of _ps.productos">
+            <ion-col *ngFor="let item of pares" [navParams]="{ producto: item, detalle: false }" [navPush]="productoPage">
+                <img [src]="item.codigo | imagen">
                 <p>{{ item.producto}}<br> {{ item.precio_compra | currency:'USD':true }} </p>
             </ion-col>
         </ion-row>
     </ion-grid>
 
-    <ion-infinite-scroll (ionInfinite)="nextPage($event)" [enabled]="hayMas">
+    <ion-infinite-scroll (ionInfinite)=" nextPage($event) " [enabled]="hayMas ">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

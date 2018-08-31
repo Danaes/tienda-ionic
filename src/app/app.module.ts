@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProductoPage } from '../pages/producto/producto';
@@ -12,13 +14,18 @@ import { CategoriasPage } from '../pages/categorias/categorias';
 import { CarritoPage } from '../pages/carrito/carrito';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OrdenesPage } from '../pages/ordenes/ordenes';
-import { LoginPage } from './../pages/login/login';
-import { PorCategoriasPage } from './../pages/por-categorias/por-categorias';
+import { LoginPage } from '../pages/login/login';
+import { PorCategoriasPage } from '../pages/por-categorias/por-categorias';
+import {BusquedaPage} from "../pages/busqueda/busqueda";
 
-import { UsuarioProvider } from './../providers/usuario/usuario';
-import { ProductosProvider } from './../providers/productos/productos';
-import { CarritoProvider } from './../providers/carrito/carrito';
+
+import { UsuarioProvider } from '../providers/usuario/usuario';
+import { ProductosProvider } from '../providers/productos/productos';
+import { CarritoProvider } from '../providers/carrito/carrito';
+
 import { HttpClientModule } from '@angular/common/http';
+
+import { ImagenPipe } from '../pipes/imagen/imagen';
 
 
 @NgModule({
@@ -32,12 +39,15 @@ import { HttpClientModule } from '@angular/common/http';
     CarritoPage,
     LoginPage,
     TabsPage,
-    OrdenesPage
+    OrdenesPage,
+    ImagenPipe,
+    BusquedaPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,14 +61,15 @@ import { HttpClientModule } from '@angular/common/http';
     CarritoPage,
     LoginPage,
     TabsPage,
-    OrdenesPage
+    OrdenesPage,
+    BusquedaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    //UsuarioProvider,
+    UsuarioProvider,
     ProductosProvider,
-    //CarritoProvider,
+    CarritoProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

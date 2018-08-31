@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {ProductosProvider} from "../../providers/productos/productos";
+import {PorCategoriasPage} from "../por-categorias/por-categorias";
 
 @Component({
   selector: 'page-categorias',
@@ -7,11 +8,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CategoriasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  lineas: Linea[] = [];
+  por_categoria = PorCategoriasPage;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriasPage');
+  constructor(private _ps: ProductosProvider) {
+    this.lineas = _ps.lineas;
   }
+}
 
+interface Linea{
+  id: string,
+  linea: string,
+  icono: string
 }

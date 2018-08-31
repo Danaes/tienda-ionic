@@ -1,15 +1,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Datos del pedido</ion-title>
+    <ion-title>Buscar productos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
+
+<ion-content>
+
+  <ion-searchbar (ionInput)="searchProducts($event)"></ion-searchbar>
 
   <ion-list>
-    <ion-item *ngFor="let item of orden.detalle">
+    <ion-item *ngFor="let item of _ps.busqueda">
       <ion-thumbnail item-left>
         <img [src]=" item.codigo | imagen ">
       </ion-thumbnail>
@@ -22,7 +25,5 @@
       </button>
     </ion-item>
   </ion-list>
-
-  <button ion-button outline block color="danger" (click)="removeOrder()">Borrar pedido</button>
 
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {ProductosProvider} from "../../providers/productos/productos";
+import {ProductoPage} from "../producto/producto";
 
 @Component({
   selector: 'page-por-categorias',
@@ -7,11 +9,21 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PorCategoriasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  categoria: Categoria = null;
+  producto = ProductoPage;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PorCategoriasPage');
-  }
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private _ps: ProductosProvider) {
 
+    this.categoria = navParams.get("categoria");
+    _ps.getByCategoria( this.categoria.id );
+
+  }
+}
+
+interface Categoria {
+  id: string,
+  linea: string,
+  icono: string
 }

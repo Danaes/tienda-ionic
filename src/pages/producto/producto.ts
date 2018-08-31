@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {CarritoProvider} from "../../providers/carrito/carrito";
 
 @Component({
   selector: 'page-producto',
@@ -7,11 +8,31 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ProductoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  producto: Producto;
+  detalle: boolean = false;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private _cs: CarritoProvider) {
+    this.producto = this.navParams.get("producto");
+    this.detalle = this.navParams.get("detalle");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductoPage');
+  removeItem( codigo: string ){
+    this._cs.removeItem( codigo );
+    this.navCtrl.pop();
   }
 
+
+
+}
+
+interface Producto{
+  codigo: string,
+  descripcion: string,
+  linea: string,
+  linea_id: string,
+  precio_compra: string,
+  producto: string,
+  proveedor: string
 }

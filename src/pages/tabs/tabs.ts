@@ -1,5 +1,8 @@
+import { CategoriasPage } from '../categorias/categorias';
+import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { OrdenesPage } from '../ordenes/ordenes';
+import {BusquedaPage} from "../busqueda/busqueda";
 
 @Component({
   selector: 'page-tabs',
@@ -7,11 +10,9 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class TabsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TabsPage');
-  }
+  home = HomePage;
+  categorias = CategoriasPage;
+  pedidos = OrdenesPage;
+  busqueda = BusquedaPage;
 
 }

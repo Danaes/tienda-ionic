@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {UsuarioProvider} from "../../providers/usuario/usuario";
 
 @Component({
   selector: 'page-login',
@@ -7,11 +8,20 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  correo: string = "";
+  contrasena: string = "";
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public viewCtrl: ViewController,
+              private _us: UsuarioProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  login(){
+    this._us.login( this.correo, this.contrasena)
+      .then( success => {
+        if ( success ) this.viewCtrl.dismiss(true);
+      });
 
+  }
 }
